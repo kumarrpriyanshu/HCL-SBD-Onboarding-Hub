@@ -14,7 +14,6 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   
   <style>
-    /* Authentic Dual-Brand Palette: HCLTech Blue (#006BB6, #002D62) & SBD Industrial Mustard Gold (#FFB800) */
     :root {
       --hcl-blue: #006BB6;
       --hcl-navy: #002D62;
@@ -40,13 +39,11 @@
                   radial-gradient(circle at 88% 82%, rgba(255, 184, 0, 0.16) 0%, transparent 40%);
     }
 
-    /* Custom high-contrast scrollbars for internal scroll areas */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #071527; }
     ::-webkit-scrollbar-thumb { background: #1a426e; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #006BB6; }
 
-    /* Strict chat lock utility classes */
     .locked-chat-container {
       height: 100%;
       max-height: 100%;
@@ -108,7 +105,7 @@
         <blockquote class="text-base md:text-lg font-medium text-slate-200 italic max-w-lg leading-relaxed">
           "The best way to predict the future is to create it together. Every groundbreaking tool and line of code begins with a single step."
         </blockquote>
-        <p class="text-xs text-sbd-mustard font-semibold mt-2"> HCLTech - Stanley Black & Decker Leadership</p>
+        <p class="text-xs text-sbd-mustard font-semibold mt-2">HCLTech - Stanley Black & Decker Leadership</p>
         <div class="mt-8 w-full flex justify-center">
           <button onclick="openNameModal()" class="w-full max-w-xs bg-sbd-mustard hover:bg-amber-400 text-slate-950 font-black px-6 py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 shadow-xl transition transform hover:scale-[1.02] cursor-pointer">
             <span>Begin My Journey</span>
@@ -206,8 +203,6 @@
   <!-- ================= 2C. 100% COMPLETION CELEBRATION MODAL ================= -->
   <div id="celebrationModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-500 animate-fade-in">
     <div class="bg-[#091b30] border-2 border-sbd-mustard rounded-3xl max-w-2xl w-full overflow-hidden shadow-[0_0_50px_rgba(255,184,0,0.35)] relative">
-      
-      <!-- Top Celebration Banner -->
       <div class="relative h-64 w-full overflow-hidden">
         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" 
              alt="Production Team Collaboration" class="w-full h-full object-cover object-center brightness-90">
@@ -235,7 +230,6 @@
         </div>
       </div>
 
-      <!-- Celebration Body -->
       <div class="p-6 md:p-8 text-center flex flex-col items-center">
         <div class="w-12 h-12 rounded-full bg-sbd-mustard/20 border-2 border-sbd-mustard text-sbd-mustard flex items-center justify-center text-xl mb-3 shadow-[0_0_20px_rgba(255,184,0,0.3)]">
           <i class="fa-solid fa-medal"></i>
@@ -249,7 +243,6 @@
           All 8 mandatory compliance milestones have been verified and cleared. You are fully authorized to contribute to <strong id="celebrationTrackName" class="text-sbd-mustard">ERP</strong> systems, active sprints, and client repositories.
         </p>
 
-        <!-- Milestones Badges Strip -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full my-5 text-[11px]">
           <div class="p-2 rounded-lg bg-[#05111f] border border-emerald-700/50 text-emerald-300 font-medium flex items-center gap-1.5 justify-center">
             <i class="fa-solid fa-check-circle"></i> SBD ID Active
@@ -279,7 +272,6 @@
     </div>
   </div>
 
-
   <!-- ================= 3. TOP BRAND NAVIGATION BAR ================= -->
   <header class="bg-[#091b30] border-b border-[#14355a] px-6 py-3 flex items-center justify-between z-30 shadow-md flex-shrink-0">
     <div class="flex items-center gap-3">
@@ -304,7 +296,6 @@
         <i class="fa-solid fa-sitemap"></i>
         <span>View Full Hierarchy</span>
       </button>
-      
 
       <div class="text-right hidden sm:block">
         <p id="topUserName" class="text-xs font-bold text-white leading-tight">Priyanshu Kumar</p>
@@ -316,11 +307,9 @@
     </div>
   </header>
 
-
   <!-- ================= 4. MAIN WORKSPACE WITH PINNED CHAT BAR ================= -->
   <div class="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden relative">
     
-    <!-- LEFT & CENTER SCROLLABLE WORKSPACE -->
     <main class="flex-1 overflow-y-auto min-h-0 p-4 md:p-6 space-y-6 brand-glow">
       
       <!-- Welcome Hero Banner -->
@@ -334,14 +323,13 @@
               <span id="badgeTrack" class="text-[11px] font-extrabold text-sbd-mustard tracking-wide">ERP</span>
             </div>
             <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-              Welcome to the SBD Delivery Ecosystem , <span id="heroWelcomeName" class="text-sbd-mustard">Priyanshu</span>!
+              Welcome to the SBD Delivery Ecosystem, <span id="heroWelcomeName" class="text-sbd-mustard">Priyanshu</span>!
             </h1>
             <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
               Your onboarding roadmap for the <strong id="heroTrackLabel" class="text-white">ERP</strong> track is active. View your designated track leads, capability heads, and complete your Sprint 0 milestones below.
             </p>
           </div>
           
-          <!-- Dynamic Circular Gauge (Starts at 0% and updates in real-time) -->
           <div class="bg-[#05111f] border border-[#163a63] rounded-xl p-3.5 flex items-center gap-4 min-w-[220px] shadow-md">
             <div id="progressRing" class="w-14 h-14 rounded-full bg-slate-800/40 border-4 border-slate-700 flex items-center justify-center text-slate-400 font-black text-sm transition-all duration-500">
               0%
@@ -362,7 +350,7 @@
             <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 flex items-center gap-2">
               <i class="fa-solid fa-file-arrow-up text-sbd-mustard text-sm"></i> Live Document Reader & Knowledge Extractor
             </h3>
-            <p class="text-[11px] text-slate-400 mt-0.5">Upload project documents or delivery sheets. PulseAI reads and indexes them immediately.</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Upload project documents or delivery sheets. PulseAI reads, indexes, and analyzes them with real-time AI.</p>
           </div>
           <span id="docCountBadge" class="text-[10px] bg-[#05111f] text-slate-300 border border-[#194372] px-2.5 py-1 rounded-full font-semibold">
             3 Docs Indexed
@@ -376,7 +364,7 @@
                 <i class="fa-solid fa-cloud-arrow-up text-sbd-mustard text-2xl"></i>
                 <div class="text-left">
                   <p class="text-xs font-semibold text-slate-200">Click to upload document (.pdf, .txt)</p>
-                  <p class="text-[10px] text-slate-400">Extracts contents into PulseAI for immediate Q&A</p>
+                  <p class="text-[10px] text-slate-400">Extracts contents into PulseAI for immediate real-time AI answering</p>
                 </div>
               </div>
               <input type="file" id="documentFileInput" class="hidden" accept=".pdf,.txt" onchange="handleDocumentUpload(event)" />
@@ -407,29 +395,23 @@
       <!-- ================= TRACK LEADERSHIP & SPRINT 0 COMPLIANCE ================= -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2 items-stretch">
         
-        <!-- Track Leadership Card (Clean, compact, no dead whitespace) -->
+        <!-- Track Leadership Card -->
         <div class="bg-[#091b30] border border-[#163a63] rounded-2xl p-5 shadow-lg flex flex-col justify-between h-[420px]">
           <div class="flex justify-between items-center pb-2 border-b border-[#14355a] flex-shrink-0">
             <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 flex items-center gap-2">
               <i class="fa-solid fa-users-gear text-sbd-mustard"></i> Key Leadership (<span id="matrixTrackTitle" class="text-sbd-mustard">ERP</span>)
             </h3>
-            <!-- <button onclick="openHierarchyModal()" class="text-[11px] text-sbd-mustard hover:underline font-bold cursor-pointer">
-              All Tracks & Hierarchy ↗
-            </button> -->
           </div>
 
-          <div class="space-y-2.5 text-xs py-2.5 flex-1 flex flex-col justify-between" id="trackLeadsContainer">
-            <!-- Populated dynamically based on track -->
-          </div>
+          <div class="space-y-2.5 text-xs py-2.5 flex-1 flex flex-col justify-between" id="trackLeadsContainer"></div>
 
-          <!-- Escalation Footnote for balanced card bottom -->
           <div class="pt-2 border-t border-[#14355a] flex items-center justify-between text-[10px] text-slate-400 flex-shrink-0">
             <span><i class="fa-solid fa-clock-rotate-left text-sbd-mustard mr-1"></i> Escalation SLA: 4 hrs</span>
             <span class="text-slate-500">Track ID: <strong id="trackIdBadge" class="text-slate-300">TRK-ERP-01</strong></span>
           </div>
         </div>
 
-        <!-- Pre-loaded Clickable Compliance Checklist with Direct Action Paths & Matching Height -->
+        <!-- Compliance Checklist -->
         <div class="bg-[#091b30] border border-[#163a63] rounded-2xl p-5 shadow-lg flex flex-col h-[420px]">
           <div class="flex justify-between items-center pb-2 border-b border-[#14355a] flex-shrink-0">
             <div>
@@ -439,7 +421,6 @@
               <p class="text-[10px] text-slate-400 mt-0.5">Click row to toggle completion or launch direct portal links</p>
             </div>
             
-            <!-- Dynamic Preview Award Button: Disabled/Locked until 100% -->
             <button id="previewAwardBtn" onclick="handleAwardButtonClick()" 
                     class="text-[10px] px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all duration-300 cursor-pointer bg-[#05111f] border border-slate-700 text-slate-400 hover:border-slate-500" 
                     title="Finish all tasks to unlock the Award">
@@ -448,36 +429,41 @@
             </button>
           </div>
 
-          <!-- 8 Pre-loaded modules with direct link buttons & descriptions in matching height scroll area -->
-          <div class="space-y-2.5 text-xs overflow-y-auto flex-1 pr-1.5 pt-2" id="complianceList">
-            <!-- Populated by renderComplianceList() -->
-          </div>
+          <div class="space-y-2.5 text-xs overflow-y-auto flex-1 pr-1.5 pt-2" id="complianceList"></div>
         </div>
 
       </div>
 
     </main>
+    
 
-    <!-- ================= 5. DOCKED PULSEAI ASSISTANT (LOCKED DEFINITE VIEWPORT CONTAINER) ================= -->
+    <!-- ================= 5. DOCKED PULSEAI ASSISTANT ================= -->
     <aside class="w-full lg:w-[410px] bg-[#091b30] border-t lg:border-t-0 lg:border-l border-[#14355a] locked-chat-container h-[50vh] lg:h-full flex-shrink-0 shadow-2xl z-20">
       
-      <!-- 1. Strictly Pinned Header (flex-shrink-0) -->
       <div class="p-3.5 border-b border-[#14355a] bg-[#071627] flex items-center justify-between flex-shrink-0">
         <div class="flex items-center gap-2.5">
           <div class="w-7 h-7 rounded-lg bg-sbd-mustard text-slate-950 flex items-center justify-center font-black text-xs shadow-md">
             P
           </div>
           <div>
-            <h3 class="text-xs font-bold text-white leading-tight">PulseAI Co-Pilot</h3>
+            <div class="flex items-center gap-2">
+              <h3 class="text-xs font-bold text-white leading-tight">PulseAI Co-Pilot</h3>
+              <span id="aiLiveStatus" class="text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-1.5 py-0.2 rounded font-semibold uppercase">Local Fallback</span>
+            </div>
             <p class="text-[10px] text-slate-400 leading-tight" id="assistantSub">Configured for ERP</p>
           </div>
         </div>
-        <button onclick="resetConversation()" class="text-slate-400 hover:text-white text-xs cursor-pointer p-1 rounded hover:bg-slate-800 transition" title="Reset chat">
-          <i class="fa-solid fa-rotate-right"></i>
-        </button>
+        
+        <div class="flex items-center gap-1">
+          <button onclick="configureApiKey()" class="text-slate-400 hover:text-sbd-mustard text-xs cursor-pointer p-1.5 rounded hover:bg-slate-800 transition" title="Set Gemini API Key for Real-Time Generative AI">
+            <i class="fa-solid fa-key"></i>
+          </button>
+          <button onclick="resetConversation()" class="text-slate-400 hover:text-white text-xs cursor-pointer p-1.5 rounded hover:bg-slate-800 transition" title="Reset chat">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
 
-      <!-- 2. Strictly Pinned Quick Suggestion Chips (flex-shrink-0) -->
       <div class="px-3 py-2 bg-[#05111f] border-b border-[#14355a] flex gap-1.5 overflow-x-auto text-[10px] whitespace-nowrap flex-shrink-0">
         <button onclick="sendQuickPrompt('Who is my track lead and capability lead?')" class="bg-[#0d2645] hover:bg-[#143863] text-slate-200 px-2.5 py-1 rounded-full border border-[#1d4f88] transition cursor-pointer">
           👥 My Track Leads
@@ -488,18 +474,16 @@
         <button onclick="sendQuickPrompt('What is my current Sprint 0 compliance status?')" class="bg-[#0d2645] hover:bg-[#143863] text-slate-200 px-2.5 py-1 rounded-full border border-[#1d4f88] transition cursor-pointer">
           📊 Compliance Status
         </button>
-        <button onclick="sendQuickPrompt('Summarize my uploaded document')" class="bg-[#0d2645] hover:bg-[#143863] text-slate-200 px-2.5 py-1 rounded-full border border-[#1d4f88] transition cursor-pointer">
+        <button onclick="sendQuickPrompt('Summarize my uploaded document and extract deliverables')" class="bg-[#0d2645] hover:bg-[#143863] text-slate-200 px-2.5 py-1 rounded-full border border-[#1d4f88] transition cursor-pointer">
           📄 Summarize Doc
         </button>
       </div>
 
-      <!-- 3. Dedicated Locked Scroll Area: ONLY THIS SCROLLS INTERNALLY (flex-1 min-h-0) -->
       <div id="chatFeed" class="chat-scroll-feed p-4 space-y-3.5 text-xs bg-[#071627]/60"></div>
 
-      <!-- 4. Strictly Pinned Bottom Input Bar: NEVER PUSHED DOWN OR OFFSCREEN (flex-shrink-0) -->
       <div class="p-3 border-t border-[#14355a] bg-[#05111f] flex-shrink-0">
         <form onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
-          <input id="chatInputBox" type="text" placeholder="Ask about your track leads, hierarchy, compliance..." 
+          <input id="chatInputBox" type="text" placeholder="Ask PulseAI about SBD, projects, or uploaded docs..." 
                  class="flex-1 bg-[#091b30] border border-[#1d4f88] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-sbd-mustard" autocomplete="off" />
           <button type="submit" class="w-9 h-9 rounded-xl bg-sbd-mustard hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs transition flex-shrink-0 cursor-pointer shadow">
             <i class="fa-solid fa-paper-plane"></i>
@@ -509,139 +493,134 @@
     </aside>
 
   </div>
+
   <!-- ================= MODAL: ABOUT HCLTECH ================= -->
-<div id="aboutHCLModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-  <div class="bg-[#091b30] border border-[#1a4473] rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl overflow-hidden">
-    <!-- Modal Header -->
-    <div class="p-5 border-b border-[#14355a] flex justify-between items-center bg-[#05111f]">
-      <div class="flex items-center gap-3">
-        <span class="bg-[#006BB6] text-white font-black px-3 py-1 rounded text-sm tracking-wider">HCLTech</span>
-        <div>
-          <h3 class="text-sm font-bold text-white">Supercharging Progress™</h3>
-          <p class="text-[11px] text-slate-400">Global Technology & Digital Engineering Leader</p>
-        </div>
-      </div>
-      <button onclick="closeAboutHCLModal()" class="text-slate-400 hover:text-white text-lg p-1.5 cursor-pointer">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-
-    <!-- Modal Body -->
-    <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300">
-      <div class="grid grid-cols-3 gap-3 text-center">
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">223,000+</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Ideapreneurs</p>
-        </div>
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">60+</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Countries</p>
-        </div>
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">$13.8B+</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Global Revenue</p>
-        </div>
-      </div>
-
-      <div class="p-3.5 bg-[#0b213b] rounded-lg border border-[#1b4777]">
-        <h4 class="font-bold text-white text-sm mb-1.5">Who We Are</h4>
-        <p>HCLTech is a next-generation global technology company that helps enterprises reimagine their businesses for the digital age. Powered by a worldwide network of R&D facilities, co-innovation labs, and global delivery centers, HCLTech delivers industry-leading capabilities across Digital, Engineering, Cloud, AI, and Enterprise Software.</p>
-      </div>
-
-      <div class="p-3.5 bg-[#071627] rounded-lg border border-[#163a63]">
-        <h4 class="font-bold text-white text-sm mb-1.5">Core Capability Verticals</h4>
-        <ul class="space-y-1.5 text-[11px]">
-          <li>• <strong class="text-white">Digital Business Services:</strong> Cloud transformation, Enterprise Application Services (EAS/SAP), and Agile DevSecOps.</li>
-          <li>• <strong class="text-white">Engineering & R&D Services (ERS):</strong> Product engineering, smart IoT telemetry, embedded systems, and firmware innovation.</li>
-          <li>• <strong class="text-white">HCLSoftware & Actian:</strong> Automated security testing, privileged access management, and hybrid enterprise analytics platforms.</li>
-        </ul>
-      </div>
-
-      <div class="flex justify-between items-center pt-2 border-t border-[#14355a]">
-        <span class="text-[11px] text-slate-400">Headquarters: Noida, India</span>
-        <a href="https://www.hcltech.com/about-us" target="_blank" rel="noopener noreferrer" class="bg-[#006BB6] hover:bg-[#005590] text-white px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-1.5 transition">
-          <span>Official HCLTech About Page</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= MODAL: ABOUT STANLEY BLACK & DECKER ================= -->
-<div id="aboutSBDModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-  <div class="bg-[#091b30] border border-[#1a4473] rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl overflow-hidden">
-    <!-- Modal Header -->
-    <div class="p-5 border-b border-[#14355a] flex justify-between items-center bg-[#05111f]">
-      <div class="flex items-center gap-3">
-        <span class="bg-sbd-mustard text-slate-950 font-black px-3 py-1 rounded text-sm tracking-wider">STANLEY BLACK & DECKER</span>
-        <div>
-          <h3 class="text-sm font-bold text-white">For Those Who Make The World™</h3>
-          <p class="text-[11px] text-slate-400">World's #1 Tool & Industrial Manufacturer</p>
-        </div>
-      </div>
-      <button onclick="closeAboutSBDModal()" class="text-slate-400 hover:text-white text-lg p-1.5 cursor-pointer">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-
-    <!-- Modal Body -->
-    <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300">
-      <div class="grid grid-cols-3 gap-3 text-center">
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">1843</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Founded in USA</p>
-        </div>
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">58,000+</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Global Employees</p>
-        </div>
-        <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
-          <p class="text-sbd-mustard font-black text-lg">NYSE: SWK</p>
-          <p class="text-[10px] text-slate-400 uppercase font-semibold">Fortune 500</p>
-        </div>
-      </div>
-
-      <div class="p-3.5 bg-[#0b213b] rounded-lg border border-[#1b4777]">
-        <h4 class="font-bold text-white text-sm mb-1.5">Who They Are</h4>
-        <p>Stanley Black & Decker (SBD) is a diversified global provider of hand tools, power tools, connected industrial equipment, and engineered fastening systems. Headquartered in New Britain, Connecticut, SBD leads the world in industrial innovations that empower the makers, builders, and tradespeople who shape our global infrastructure.</p>
-      </div>
-
-      <div class="p-3.5 bg-[#071627] rounded-lg border border-[#163a63]">
-        <h4 class="font-bold text-white text-sm mb-1.5">Flagship Brand Family Supported by HCLTech</h4>
-        <div class="grid grid-cols-2 gap-2 text-[11px] mt-2">
-          <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
-            <span class="text-sbd-mustard font-bold">DEWALT®</span>
-            <p class="text-[10px] text-slate-400">Guaranteed Tough® professional power tools and smart IoT ecosystem.</p>
-          </div>
-          <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
-            <span class="text-red-400 font-bold">CRAFTSMAN®</span>
-            <p class="text-[10px] text-slate-400">Automotive tools, storage chests, and lawn equipment.</p>
-          </div>
-          <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
-            <span class="text-sbd-mustard font-bold">STANLEY®</span>
-            <p class="text-[10px] text-slate-400">Precision hand tools, tape measures, and trade storage.</p>
-          </div>
-          <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
-            <span class="text-orange-400 font-bold">BLACK+DECKER®</span>
-            <p class="text-[10px] text-slate-400">Home appliances, DIY equipment, and consumer tools.</p>
+  <div id="aboutHCLModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#091b30] border border-[#1a4473] rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl overflow-hidden">
+      <div class="p-5 border-b border-[#14355a] flex justify-between items-center bg-[#05111f]">
+        <div class="flex items-center gap-3">
+          <span class="bg-[#006BB6] text-white font-black px-3 py-1 rounded text-sm tracking-wider">HCLTech</span>
+          <div>
+            <h3 class="text-sm font-bold text-white">Supercharging Progress™</h3>
+            <p class="text-[11px] text-slate-400">Global Technology & Digital Engineering Leader</p>
           </div>
         </div>
+        <button onclick="closeAboutHCLModal()" class="text-slate-400 hover:text-white text-lg p-1.5 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <div class="flex justify-between items-center pt-2 border-t border-[#14355a]">
-        <span class="text-[11px] text-slate-400">Headquarters: New Britain, CT, USA</span>
-        <a href="https://www.stanleyblackanddecker.com/about" target="_blank" rel="noopener noreferrer" class="bg-sbd-mustard hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-lg font-black text-xs flex items-center gap-1.5 transition shadow">
-          <span>Official SBD About Page</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-        </a>
+      <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300">
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">223,000+</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Ideapreneurs</p>
+          </div>
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">60+</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Countries</p>
+          </div>
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">$13.8B+</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Global Revenue</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 bg-[#0b213b] rounded-lg border border-[#1b4777]">
+          <h4 class="font-bold text-white text-sm mb-1.5">Who We Are</h4>
+          <p>HCLTech is a next-generation global technology company that helps enterprises reimagine their businesses for the digital age. Powered by a worldwide network of R&D facilities, co-innovation labs, and global delivery centers, HCLTech delivers industry-leading capabilities across Digital, Engineering, Cloud, AI, and Enterprise Software.</p>
+        </div>
+
+        <div class="p-3.5 bg-[#071627] rounded-lg border border-[#163a63]">
+          <h4 class="font-bold text-white text-sm mb-1.5">Core Capability Verticals</h4>
+          <ul class="space-y-1.5 text-[11px]">
+            <li>• <strong class="text-white">Digital Business Services:</strong> Cloud transformation, Enterprise Application Services (EAS/SAP), and Agile DevSecOps.</li>
+            <li>• <strong class="text-white">Engineering & R&D Services (ERS):</strong> Product engineering, smart IoT telemetry, embedded systems, and firmware innovation.</li>
+            <li>• <strong class="text-white">HCLSoftware & Actian:</strong> Automated security testing, privileged access management, and hybrid enterprise analytics platforms.</li>
+          </ul>
+        </div>
+
+        <div class="flex justify-between items-center pt-2 border-t border-[#14355a]">
+          <span class="text-[11px] text-slate-400">Headquarters: Noida, India</span>
+          <a href="https://www.hcltech.com/about-us" target="_blank" rel="noopener noreferrer" class="bg-[#006BB6] hover:bg-[#005590] text-white px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-1.5 transition">
+            <span>Official HCLTech About Page</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <!-- ================= MODAL: ABOUT STANLEY BLACK & DECKER ================= -->
+  <div id="aboutSBDModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#091b30] border border-[#1a4473] rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl overflow-hidden">
+      <div class="p-5 border-b border-[#14355a] flex justify-between items-center bg-[#05111f]">
+        <div class="flex items-center gap-3">
+          <span class="bg-sbd-mustard text-slate-950 font-black px-3 py-1 rounded text-sm tracking-wider">STANLEY BLACK & DECKER</span>
+          <div>
+            <h3 class="text-sm font-bold text-white">For Those Who Make The World™</h3>
+            <p class="text-[11px] text-slate-400">World's #1 Tool & Industrial Manufacturer</p>
+          </div>
+        </div>
+        <button onclick="closeAboutSBDModal()" class="text-slate-400 hover:text-white text-lg p-1.5 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-  <!-- ================= 6. JAVASCRIPT ENGINE ================= -->
+      <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300">
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">1843</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Founded in USA</p>
+          </div>
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">58,000+</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Global Employees</p>
+          </div>
+          <div class="p-3 bg-[#071627] rounded-lg border border-[#163a63]">
+            <p class="text-sbd-mustard font-black text-lg">NYSE: SWK</p>
+            <p class="text-[10px] text-slate-400 uppercase font-semibold">Fortune 500</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 bg-[#0b213b] rounded-lg border border-[#1b4777]">
+          <h4 class="font-bold text-white text-sm mb-1.5">Who They Are</h4>
+          <p>Stanley Black & Decker (SBD) is a diversified global provider of hand tools, power tools, connected industrial equipment, and engineered fastening systems. Headquartered in New Britain, Connecticut, SBD leads the world in industrial innovations that empower the makers, builders, and tradespeople who shape our global infrastructure.</p>
+        </div>
+
+        <div class="p-3.5 bg-[#071627] rounded-lg border border-[#163a63]">
+          <h4 class="font-bold text-white text-sm mb-1.5">Flagship Brand Family Supported by HCLTech</h4>
+          <div class="grid grid-cols-2 gap-2 text-[11px] mt-2">
+            <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
+              <span class="text-sbd-mustard font-bold">DEWALT®</span>
+              <p class="text-[10px] text-slate-400">Guaranteed Tough® professional power tools and smart IoT ecosystem.</p>
+            </div>
+            <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
+              <span class="text-red-400 font-bold">CRAFTSMAN®</span>
+              <p class="text-[10px] text-slate-400">Automotive tools, storage chests, and lawn equipment.</p>
+            </div>
+            <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
+              <span class="text-sbd-mustard font-bold">STANLEY®</span>
+              <p class="text-[10px] text-slate-400">Precision hand tools, tape measures, and trade storage.</p>
+            </div>
+            <div class="p-2 bg-[#091b30] rounded border border-slate-700/60">
+              <span class="text-orange-400 font-bold">BLACK+DECKER®</span>
+              <p class="text-[10px] text-slate-400">Home appliances, DIY equipment, and consumer tools.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2 border-t border-[#14355a]">
+          <span class="text-[11px] text-slate-400">Headquarters: New Britain, CT, USA</span>
+          <a href="https://www.stanleyblackanddecker.com/about" target="_blank" rel="noopener noreferrer" class="bg-sbd-mustard hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-lg font-black text-xs flex items-center gap-1.5 transition shadow">
+            <span>Official SBD About Page</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ================= 6. JAVASCRIPT ENGINE WITH REAL-TIME AI ================= -->
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -653,8 +632,10 @@
 
     let hasCelebrated = false;
 
-    // Official 8 Tracks Mapping with HCL and SBD Leaders
-   const TRACK_LEADERSHIP_DATA = {
+    // Real-Time Gemini AI API Key Storage
+    let GEMINI_API_KEY = localStorage.getItem('sbd_gemini_api_key') || "";
+
+    const TRACK_LEADERSHIP_DATA = {
       "ERP": {
         description: "Enterprise Resource Planning (SAP, S/4HANA & Legacy ERP)",
         hclProjectHead: "Copal Jee",
@@ -721,7 +702,6 @@
       }
     };
 
-    // Pre-loaded 8 mandatory compliance tasks WITH ACTION PATHS & LINKS (ALL START AT FALSE = 0%)
     let complianceTasks = [
       {
         name: "SBD Account Creation",
@@ -800,7 +780,7 @@
     let dynamicDocuments = [
       {
         fileName: "SBD_Account_Charter.pdf",
-        content: "Stanley Black & Decker engagement delivery matrix covering 8 tracks: ERP, Supply Chain, Enterprise Data AI, Commercials, Finance, HR & Legal, Engineering IT, and AES- GovernX."
+        content: "Stanley Black & Decker engagement delivery matrix covering 8 tracks: ERP, Supply Chain, Enterprise Data AI, Commercials, Finance, HR & Legal, Engineering IT, and AES- GovernX. Executive Sponsors include Shalini Chandel (HCLTech) and Markus Snyder (SBD)."
       },
       {
         fileName: "Delivery_Status_Oct26.xlsx",
@@ -812,7 +792,92 @@
       }
     ];
 
-    // Modal Control Functions
+    function updateAIStatusUI() {
+      const badge = document.getElementById('aiLiveStatus');
+      if (GEMINI_API_KEY) {
+        badge.className = "text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded font-semibold uppercase animate-pulse";
+        badge.innerText = "Gemini 2.5 Live";
+      } else {
+        badge.className = "text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-1.5 py-0.2 rounded font-semibold uppercase";
+        badge.innerText = "Local Fallback";
+      }
+    }
+
+    function configureApiKey() {
+      const current = GEMINI_API_KEY ? "●●●●●●●●●●●●" : "";
+      const userKey = prompt("Enter your Google Gemini API Key for real-time generative responses:", current);
+      if (userKey !== null) {
+        if (userKey.trim().length > 0 && !userKey.includes("●")) {
+          GEMINI_API_KEY = userKey.trim();
+          localStorage.setItem('sbd_gemini_api_key', GEMINI_API_KEY);
+          updateAIStatusUI();
+          appendChatMessage('assistant', '✨ <strong>Real-Time Gemini AI Activated!</strong> I can now read your uploaded documents, think deeply, and generate answers using real-time neural intelligence.');
+        } else if (userKey.trim().length === 0) {
+          GEMINI_API_KEY = "";
+          localStorage.removeItem('sbd_gemini_api_key');
+          updateAIStatusUI();
+          appendChatMessage('assistant', 'ℹ️ Gemini API key cleared. Operating in local knowledge base fallback mode.');
+        }
+      }
+    }
+
+    async function callGeminiAI(userQuery) {
+      const currentTrack = TRACK_LEADERSHIP_DATA[activeEmployee.track] || TRACK_LEADERSHIP_DATA["ERP"];
+      const pct = calculateCompliancePercentage();
+      const docsContext = dynamicDocuments.map(d => `[Source Document: ${d.fileName}]\n${d.content.substring(0, 4000)}`).join('\n\n---\n\n');
+
+      const systemPrompt = `
+You are "PulseAI", the executive onboarding and knowledge co-pilot for HCLTech associates deployed on the Stanley Black & Decker (SBD) global engagement account.
+Employee Context:
+- Associate Name: ${activeEmployee.fullName}
+- Mapped Delivery Track: ${activeEmployee.track}
+- Track Description: ${currentTrack.description}
+- HCLTech Project Head: ${currentTrack.hclProjectHead}
+- HCLTech Track Lead: ${currentTrack.hclTrackLead}
+- HCLTech Capability Lead: ${currentTrack.hclCapabilityLead}
+- SBD Client Sponsor: ${currentTrack.sbdCounterpart}
+- Current Sprint 0 Compliance Readiness: ${pct}%
+
+Indexed Account & Uploaded Documents:
+${docsContext}
+
+Core Directives:
+1. Address ${activeEmployee.firstName} professionally as an intelligent colleague.
+2. Ground answers in the provided document context whenever applicable. Always cite the file name if citing extracted facts.
+3. If asked about compliance, mention their current score (${pct}%) and next steps.
+4. Format your output cleanly with HTML tags: <strong>, <em>, <code>, <ul>, <li>, and <br>. Do NOT use raw markdown asterisks (**) or triple-backticks. Keep answers compact for a sleek side-drawer chat interface.
+`;
+
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+      const payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [
+              { text: `${systemPrompt}\n\nEmployee Query: ${userQuery}` }
+            ]
+          }
+        ],
+        generationConfig: {
+          temperature: 0.3,
+          maxOutputTokens: 750
+        }
+      };
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || "Gemini API Network Failure");
+      }
+
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    }
+
     function openNameModal() {
       document.getElementById('welcomeOverlay').classList.add('hidden');
       document.getElementById('nameModal').classList.remove('hidden');
@@ -827,23 +892,23 @@
     function closeHierarchyModal() {
       document.getElementById('hierarchyModal').classList.add('hidden');
     }
+
     function openAboutHCLModal() {
-  document.getElementById('aboutHCLModal').classList.remove('hidden');
-}
+      document.getElementById('aboutHCLModal').classList.remove('hidden');
+    }
 
-function closeAboutHCLModal() {
-  document.getElementById('aboutHCLModal').classList.add('hidden');
-}
+    function closeAboutHCLModal() {
+      document.getElementById('aboutHCLModal').classList.add('hidden');
+    }
 
-function openAboutSBDModal() {
-  document.getElementById('aboutSBDModal').classList.remove('hidden');
-}
+    function openAboutSBDModal() {
+      document.getElementById('aboutSBDModal').classList.remove('hidden');
+    }
 
-function closeAboutSBDModal() {
-  document.getElementById('aboutSBDModal').classList.add('hidden');
-}
+    function closeAboutSBDModal() {
+      document.getElementById('aboutSBDModal').classList.add('hidden');
+    }
 
-    // Award Toast Notification Controller
     let toastTimeout = null;
     function showAwardLockedToast(message) {
       const toast = document.getElementById('awardToast');
@@ -860,7 +925,6 @@ function closeAboutSBDModal() {
       }, 3500);
     }
 
-    // Celebration Modal Functions & Award Button Gatekeeper
     function handleAwardButtonClick() {
       const pct = calculateCompliancePercentage();
       if (pct === 100) {
@@ -877,7 +941,6 @@ function closeAboutSBDModal() {
       document.getElementById('celebrationTrackName').innerText = activeEmployee.track;
       document.getElementById('celebrationModal').classList.remove('hidden');
       
-      // Fire celebration confetti effects
       if (typeof confetti === 'function') {
         confetti({
           particleCount: 80,
@@ -913,9 +976,7 @@ function closeAboutSBDModal() {
       sendQuickPrompt("I have completed all 8 onboarding tasks! What are my production delivery guidelines?");
     }
 
-    // Handle Direct Action Link Click
     function openTaskAction(event, index) {
-      // Prevent row toggle when clicking the specific action link button
       event.stopPropagation();
       const task = complianceTasks[index];
       
@@ -926,13 +987,11 @@ function closeAboutSBDModal() {
         `<em>Complete this step in the opened window, then mark this row as completed!</em>`
       );
 
-      // Attempt to open link or alert path
       if (task.actionPath.startsWith('http') || task.actionPath.startsWith('mailto')) {
         window.open(task.actionPath, '_blank');
       }
     }
 
-    // Apply Personalization
     function applyPersonalization(e) {
       e.preventDefault();
       const name = document.getElementById('userNameInput').value.trim();
@@ -945,13 +1004,11 @@ function closeAboutSBDModal() {
 
       document.getElementById('nameModal').classList.add('hidden');
       
-      // Update Top Nav
       document.getElementById('topUserName').innerText = activeEmployee.fullName;
       document.getElementById('topUserTrack').innerText = `${activeEmployee.track} Track`;
       const initials = name.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase();
       document.getElementById('topUserInitials').innerText = initials || "PK";
 
-      // Update Hero Section
       document.getElementById('heroWelcomeName').innerText = activeEmployee.fullName;
       document.getElementById('badgeTrack').innerText = activeEmployee.track;
       document.getElementById('heroTrackLabel').innerText = activeEmployee.track;
@@ -961,9 +1018,7 @@ function closeAboutSBDModal() {
       renderTrackLeadershipUI(track);
       initPulseChat();
       renderComplianceList();
-    }
-
-    // Render Track Leadership UI
+                        }
     function renderTrackLeadershipUI(trackName) {
       const data = TRACK_LEADERSHIP_DATA[trackName] || TRACK_LEADERSHIP_DATA["ERP"];
       const container = document.getElementById('trackLeadsContainer');
@@ -1007,7 +1062,6 @@ function closeAboutSBDModal() {
       `;
     }
 
-    // Render Full 8-Track Hierarchy Modal
     function renderFullHierarchy() {
       const grid = document.getElementById('fullHierarchyGrid');
       grid.innerHTML = "";
@@ -1039,7 +1093,6 @@ function closeAboutSBDModal() {
       }
     }
 
-    // ================= REAL-TIME DYNAMIC CHECKLIST WITH ACTION BUTTONS & LINKS =================
     function renderComplianceList() {
       const container = document.getElementById('complianceList');
       if (!container) return;
@@ -1068,7 +1121,6 @@ function closeAboutSBDModal() {
             </span>
           </div>
 
-          <!-- Bottom Interactive Path & Link Action Bar -->
           <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t ${task.completed ? 'border-emerald-800/40' : 'border-[#14355a]'} text-[10px]">
             <div class="flex items-center gap-1.5 text-slate-400 font-mono truncate max-w-[280px]">
               <i class="fa-solid fa-location-arrow text-[9px] text-sbd-mustard"></i>
@@ -1088,7 +1140,6 @@ function closeAboutSBDModal() {
 
       updateComplianceUI();
     }
-
     function toggleCompliance(index) {
       complianceTasks[index].completed = !complianceTasks[index].completed;
       renderComplianceList();
@@ -1102,7 +1153,6 @@ function closeAboutSBDModal() {
         `I've updated your Sprint 0 checklist, ${activeEmployee.firstName}: <strong>${task.name}</strong> is now ${statusText}! Your readiness score is now <strong>${pct}%</strong>.`
       );
 
-      // Trigger 100% celebration modal when all 8 tasks are checked
       if (pct === 100) {
         if (!hasCelebrated) {
           hasCelebrated = true;
@@ -1111,7 +1161,6 @@ function closeAboutSBDModal() {
           }, 450);
         }
       } else {
-        // Reset celebration flag if user unchecks an item
         hasCelebrated = false;
       }
     }
@@ -1159,7 +1208,6 @@ function closeAboutSBDModal() {
         }
       }
 
-      // Dynamic Award Button State: Glow & Unlock only at 100%
       const awardBtn = document.getElementById('previewAwardBtn');
       const awardIcon = document.getElementById('awardBtnIcon');
       const awardText = document.getElementById('awardBtnText');
@@ -1177,7 +1225,6 @@ function closeAboutSBDModal() {
         }
       }
 
-      // Update Top Status Hero Tag
       const dot = document.getElementById('sprintActiveDot');
       const text = document.getElementById('sprintActiveText');
       if (dot && text) {
@@ -1191,9 +1238,7 @@ function closeAboutSBDModal() {
           text.innerText = "Sprint 0 Active";
         }
       }
-    }
-
-    // ================= REAL DOCUMENT READING & EXTRACTOR =================
+        }
     async function handleDocumentUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -1248,7 +1293,6 @@ function closeAboutSBDModal() {
       }
     }
 
-    // ================= PULSEAI ASSISTANT LOGIC (LOCKED AUTO-SCROLL TO BOTTOM) =================
     function scrollToBottom() {
       const feed = document.getElementById('chatFeed');
       if (feed) {
@@ -1272,14 +1316,15 @@ function closeAboutSBDModal() {
             • <strong>Your Project Head:</strong> ${trackData.hclProjectHead}<br>
             • <strong>Your Track Lead:</strong> ${trackData.hclTrackLead}<br>
             • <strong>Client Counterpart:</strong> ${trackData.sbdCounterpart}<br><br>
-            Use the action buttons in the checklist to access portals directly, or ask me any question!
+            Use the action buttons in the checklist to access portals directly, or ask me any question! Click the <i class="fa-solid fa-key text-sbd-mustard"></i> icon in the header to activate real-time Gemini AI.
           </div>
         </div>
       `;
       scrollToBottom();
+      updateAIStatusUI();
     }
 
-    function handleChatSubmit(e) {
+    async function handleChatSubmit(e) {
       if (e) e.preventDefault();
       const input = document.getElementById('chatInputBox');
       const text = input.value.trim();
@@ -1291,6 +1336,25 @@ function closeAboutSBDModal() {
       const typingId = showPulseTyping();
       scrollToBottom();
 
+      if (GEMINI_API_KEY) {
+        try {
+          const aiResponse = await callGeminiAI(text);
+          removePulseTyping(typingId);
+          
+          let formatted = aiResponse
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/```([\s\S]*?)```/g, '<pre class="bg-black/40 p-2 rounded text-[11px] my-1 overflow-x-auto">$1</pre>')
+            .replace(/\n/g, '<br>');
+
+          appendChatMessage('assistant', formatted);
+          scrollToBottom();
+          return;
+        } catch (err) {
+          removePulseTyping(typingId);
+          appendChatMessage('assistant', `<span class="text-amber-400">⚠️ Live AI Notice: ${err.message}</span><br>Switching automatically to local verified knowledge base:`);
+        }
+            }
       setTimeout(() => {
         removePulseTyping(typingId);
         const q = text.toLowerCase();
@@ -1307,15 +1371,15 @@ function closeAboutSBDModal() {
         }
         else if (q.includes('hierarchy') || q.includes('all tracks') || q.includes('all leaders') || q.includes('structure')) {
           reply = `<strong>HCLTech × Stanley Black & Decker 8-Track Leadership Overview:</strong><br><br>` +
-                  `• <strong>Account Sponsors:</strong> Amitabh Kumar (HCL Delivery VP) & Markus Snyder (SBD VP)<br>` +
-                  `• <strong>ERP:</strong> Siddharth Verma (Track Lead) | Kavita Nair (Capability Lead)<br>` +
-                  `• <strong>Supply Chain:</strong> Deepak Choudhary (Track Lead) | Vikram Malhotra (Capability Lead)<br>` +
-                  `• <strong>Enterprise Data AI:</strong> Rohan Kulkarni (Track Lead) | Dr. Alok Nath (Capability Lead)<br>` +
-                  `• <strong>Commercials:</strong> Ananya Roy (Track Lead) | Gaurav Bhalla (Capability Lead)<br>` +
-                  `• <strong>Finance:</strong> Pooja Hegde (Track Lead) | Naveen Raghavan (Capability Lead)<br>` +
-                  `• <strong>HR, Legal & Compliance:</strong> Radhika Iyer (Track Lead) | Rameshwar Prasad (Capability Lead)<br>` +
-                  `• <strong>Engineering IT:</strong> Amitabh Banerjee (Track Lead) | Saurabh Saxena (Capability Lead)<br>` +
-                  `• <strong>AES- GovernX:</strong> Manish Pandey (Track Lead) | Sanjay Singhania (Capability Lead)<br><br>` +
+                  `• <strong>Account Sponsors:</strong> Shalini Chandel (HCL Delivery VP) & Markus Snyder (SBD VP)<br>` +
+                  `• <strong>ERP:</strong> Tarun Parmar (Track Lead) | Kavita Nair (Capability Lead)<br>` +
+                  `• <strong>Supply Chain:</strong> Jayaram Babu (Track Lead) | Vikram Malhotra (Capability Lead)<br>` +
+                  `• <strong>Enterprise Data AI:</strong> Pavvan Sajja (Track Lead) | Sachin Mehta (Capability Lead)<br>` +
+                  `• <strong>Commercials:</strong> Satya (Track Lead) | Laura Damf (Capability Lead)<br>` +
+                  `• <strong>Finance:</strong> Soma Veerapan (Track Lead) | Paul Davies (Capability Lead)<br>` +
+                  `• <strong>HR, Legal & Compliance:</strong> Nadim Khan (Track Lead) | Paul Davies (Capability Lead)<br>` +
+                  `• <strong>Engineering IT:</strong> Mohd Matheen (Track Lead) | Amey Joshi (Capability Lead)<br>` +
+                  `• <strong>AES- GovernX:</strong> Priyanshu Tripathi (Track Lead) | Ajay Tripathi (Capability Lead)<br><br>` +
                   `<em>Click <strong>"View Full Hierarchy"</strong> in the top header to view the full interactive organizational matrix!</em>`;
         }
         else if (q.includes('document') || q.includes('upload') || q.includes('summarize')) {
@@ -1328,7 +1392,7 @@ function closeAboutSBDModal() {
           } else {
             reply = `Currently indexed documents:<br>` +
                     dynamicDocuments.map(d => `• <strong>${d.fileName}</strong>`).join('<br>') +
-                    `<br><br>Upload additional documents via the reader above to query them!`;
+                    `<br><br>Upload additional documents via the reader above or enter your Gemini Key for live synthesis!`;
           }
         }
         else if (q.includes('link') || q.includes('portal') || q.includes('url') || q.includes('servicenow') || q.includes('isuccess')) {
@@ -1350,33 +1414,14 @@ function closeAboutSBDModal() {
                     : `• <strong>Status:</strong> All 8 Sprint 0 compliance requirements are 100% completed! You are certified for Production Delivery. 🎉`);
         }
         else {
-          let foundTrackKey = null;
-          for (const key of Object.keys(TRACK_LEADERSHIP_DATA)) {
-            if (q.includes(key.toLowerCase())) {
-              foundTrackKey = key;
-              break;
-            }
-          }
-
-          if (foundTrackKey) {
-            const tData = TRACK_LEADERSHIP_DATA[foundTrackKey];
-            reply = `Leadership structure for <strong>${foundTrackKey}</strong>:<br><br>` +
-                    `• <strong>HCL Project Head:</strong> ${tData.hclProjectHead}<br>` +
-                    `• <strong>HCL Track Lead:</strong> ${tData.hclTrackLead}<br>` +
-                    `• <strong>HCL Capability Lead:</strong> ${tData.hclCapabilityLead}<br>` +
-                    `• <strong>SBD Counterpart:</strong> ${tData.sbdCounterpart}<br>` +
-                    `• <strong>SBD Capability Lead:</strong> ${tData.sbdCapabilityLead}`;
-          } else {
-            reply = `Regarding <em>"${text}"</em>: You can reach out directly to your <strong>${activeEmployee.track}</strong> Track Lead (<strong>${currentTrack.hclTrackLead}</strong>) or Project Head (<strong>${currentTrack.hclProjectHead}</strong>). You can also click <strong>"View Full Hierarchy"</strong> above to inspect all escalation contacts.`;
-          }
+          reply = `Regarding <em>"${text}"</em>: You can reach out directly to your <strong>${activeEmployee.track}</strong> Track Lead (<strong>${currentTrack.hclTrackLead}</strong>) or Project Head (<strong>${currentTrack.hclProjectHead}</strong>).<br><br><em>Tip: Click the <i class="fa-solid fa-key text-sbd-mustard"></i> key icon in the top right to configure a Gemini API key for open-ended generative responses!</em>`;
         }
 
         appendChatMessage('assistant', reply);
         scrollToBottom();
       }, 350);
-    }
-
-    function appendChatMessage(role, content) {
+            }
+        function appendChatMessage(role, content) {
       const feed = document.getElementById('chatFeed');
       const div = document.createElement('div');
 
@@ -1409,7 +1454,7 @@ function closeAboutSBDModal() {
       div.innerHTML = `
         <div class="w-6 h-6 rounded-lg bg-sbd-mustard text-slate-950 flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5 shadow">P</div>
         <div class="bg-[#0b213b] border border-[#18426f] text-slate-400 px-3 py-2 rounded-2xl rounded-tl-none text-[11px] italic">
-          PulseAI is reviewing hierarchy...
+          PulseAI is analyzing and generating response...
         </div>
       `;
       feed.appendChild(div);
@@ -1431,12 +1476,13 @@ function closeAboutSBDModal() {
       initPulseChat();
     }
 
-    // Initialize on page boot
     window.addEventListener('DOMContentLoaded', () => {
       renderTrackLeadershipUI(activeEmployee.track);
       initPulseChat();
-      renderComplianceList(); // Renders all 8 rich tasks starting at 0%
+      renderComplianceList();
+      updateAIStatusUI();
     });
   </script>
 </body>
 </html>
+    
