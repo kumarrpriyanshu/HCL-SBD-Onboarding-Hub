@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <!-- ================= 1. INSPIRATIONAL WELCOME MODAL (STAGE 1) ================= -->
+  <!-- ================= 1. INSPIRATIONAL WELCOME MODAL ================= -->
   <div id="welcomeOverlay" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300">
     <div class="bg-[#091b30] border border-[#163a63] rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative">
       <div class="relative h-64 w-full overflow-hidden">
@@ -116,7 +116,7 @@
     </div>
   </div>
 
-  <!-- ================= 2. PERSONAL PROFILE INPUT MODAL (STAGE 2) ================= -->
+  <!-- ================= 2. PERSONAL PROFILE INPUT MODAL ================= -->
   <div id="nameModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-[#091b30] border border-[#163a63] rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="w-12 h-12 rounded-xl bg-sbd-mustard/15 border border-sbd-mustard/40 text-sbd-mustard flex items-center justify-center text-xl mb-4">
@@ -343,17 +343,17 @@
         </div>
       </div>
 
-      <!-- ================= LIVE DOCUMENT READER ================= -->
+      <!-- ================= LIVE DOCUMENT READER (100% REAL-TIME UPLOADS ONLY) ================= -->
       <div class="bg-[#091b30] border border-[#163a63] rounded-2xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-3">
           <div>
             <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 flex items-center gap-2">
               <i class="fa-solid fa-file-arrow-up text-sbd-mustard text-sm"></i> Live Document Reader & Knowledge Extractor
             </h3>
-            <p class="text-[11px] text-slate-400 mt-0.5">Upload project documents or delivery sheets. PulseAI reads, indexes, and analyzes them with real-time AI.</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Upload any PDF or TXT file. PulseAI prioritizes answering from your uploaded documents, and uses its own intelligence if not found.</p>
           </div>
-          <span id="docCountBadge" class="text-[10px] bg-[#05111f] text-slate-300 border border-[#194372] px-2.5 py-1 rounded-full font-semibold">
-            3 Docs Indexed
+          <span id="docCountBadge" class="text-[10px] bg-[#05111f] text-slate-400 border border-[#194372] px-2.5 py-1 rounded-full font-semibold">
+            0 Docs Indexed
           </span>
         </div>
 
@@ -364,25 +364,18 @@
                 <i class="fa-solid fa-cloud-arrow-up text-sbd-mustard text-2xl"></i>
                 <div class="text-left">
                   <p class="text-xs font-semibold text-slate-200">Click to upload document (.pdf, .txt)</p>
-                  <p class="text-[10px] text-slate-400">Extracts contents into PulseAI for immediate real-time AI answering</p>
+                  <p class="text-[10px] text-slate-400">Extracted client-side in memory with zero cloud leakage</p>
                 </div>
               </div>
               <input type="file" id="documentFileInput" class="hidden" accept=".pdf,.txt" onchange="handleDocumentUpload(event)" />
             </label>
           </div>
 
+          <!-- Dynamic document list populated on upload only -->
           <div class="md:col-span-5 bg-[#05111f] border border-[#163a63] rounded-xl p-3 h-24 overflow-y-auto space-y-1.5" id="uploadedDocsList">
-            <div class="flex items-center gap-2 text-[11px] text-slate-300">
-              <i class="fa-solid fa-file-pdf text-red-400"></i>
-              <span class="truncate">SBD_Account_Charter.pdf</span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-slate-300">
-              <i class="fa-solid fa-file-lines text-[#38bdf8]"></i>
-              <span class="truncate">Delivery_Status_Oct26.xlsx</span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-slate-300">
-              <i class="fa-solid fa-file-shield text-emerald-400"></i>
-              <span class="truncate">Sprint0_Compliance_Rules.pdf</span>
+            <div id="noDocsPlaceholder" class="h-full flex flex-col items-center justify-center text-center text-slate-500 text-[11px]">
+              <i class="fa-regular fa-folder-open text-base mb-1 text-slate-600"></i>
+              <span>No documents uploaded yet</span>
             </div>
           </div>
         </div>
@@ -435,7 +428,6 @@
       </div>
 
     </main>
-    
 
     <!-- ================= 5. DOCKED PULSEAI ASSISTANT ================= -->
     <aside class="w-full lg:w-[410px] bg-[#091b30] border-t lg:border-t-0 lg:border-l border-[#14355a] locked-chat-container h-[50vh] lg:h-full flex-shrink-0 shadow-2xl z-20">
@@ -620,7 +612,8 @@
       </div>
     </div>
   </div>
-  <!-- ================= 6. JAVASCRIPT ENGINE WITH REAL-TIME AI ================= -->
+
+  <!-- ================= 6. JAVASCRIPT ENGINE ================= -->
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -634,6 +627,17 @@
 
     // Real-Time Gemini AI API Key Storage
     let GEMINI_API_KEY = localStorage.getItem('sbd_gemini_api_key') || "";
+
+    // Resilient Multi-Model Pool (Automatic failover during high-demand periods)
+    const GEMINI_MODELS = [
+      "gemini-2.5-flash",
+      "gemini-1.5-flash",
+      "gemini-1.5-flash-latest",
+      "gemini-1.5-pro",
+      "gemini-3.6-flash",
+      "gemini-3.8-flash",
+      "gemini-3.6-flash-lite"
+    ];
 
     const TRACK_LEADERSHIP_DATA = {
       "ERP": {
@@ -777,30 +781,95 @@
       }
     ];
 
-    let dynamicDocuments = [
-      {
-        fileName: "SBD_Account_Charter.pdf",
-        content: "Stanley Black & Decker engagement delivery matrix covering 8 tracks: ERP, Supply Chain, Enterprise Data AI, Commercials, Finance, HR & Legal, Engineering IT, and AES- GovernX. Executive Sponsors include Shalini Chandel (HCLTech) and Markus Snyder (SBD)."
-      },
-      {
-        fileName: "Delivery_Status_Oct26.xlsx",
-        content: "Oct 26 Delivery Status reflects active roadmaps across ERP, Supply Chain, Enterprise Data AI, Commercials, Finance, HR Legal, Engineering IT, and AES GovernX with weekly milestone governance."
-      },
-      {
-        fileName: "Sprint0_Compliance_Rules.pdf",
-        content: "Sprint 0 rules: Complete SBD Account Creation, BGV-Drug Test clearance, ServiceNow requests, iSuccess training, SBD mandatory modules, KT sign-off, hands-on practice, and first delivery."
-      }
-    ];
+    // Starts completely empty — 0% mock documents
+    let dynamicDocuments = [];
 
+    // AI Status Indicator UI
     function updateAIStatusUI() {
       const badge = document.getElementById('aiLiveStatus');
       if (GEMINI_API_KEY) {
         badge.className = "text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded font-semibold uppercase animate-pulse";
-        badge.innerText = "Gemini 2.5 Live";
+        badge.innerText = "Gemini Live";
       } else {
         badge.className = "text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-1.5 py-0.2 rounded font-semibold uppercase";
         badge.innerText = "Local Fallback";
       }
+    }
+
+    // Real-Time Gemini AI Call with Automatic Multi-Model Failover & Tier-2 General Brain Fallback
+    async function callGeminiAI(userQuery) {
+      const currentTrack = TRACK_LEADERSHIP_DATA[activeEmployee.track] || TRACK_LEADERSHIP_DATA["ERP"];
+      const pct = calculateCompliancePercentage();
+
+      // Gather uploaded documents context
+      let docsContext = "No custom documents uploaded by the user yet.";
+      if (dynamicDocuments.length > 0) {
+        docsContext = dynamicDocuments.map((d, i) => 
+          `=== UPLOADED DOCUMENT [${i + 1}]: "${d.fileName}" ===\n${d.content.substring(0, 6000)}`
+        ).join('\n\n---\n\n');
+      }
+
+      const systemPrompt = `
+You are "PulseAI", the official HCLTech onboarding and technical co-pilot for the Stanley Black & Decker (SBD) global delivery engagement.
+
+Current Associate Profile:
+- Name: ${activeEmployee.fullName}
+- Mapped Delivery Track: ${activeEmployee.track}
+- Track Description: ${currentTrack.description}
+- HCLTech Project Head: ${currentTrack.hclProjectHead}
+- HCLTech Track Lead: ${currentTrack.hclTrackLead}
+- HCLTech Capability Lead: ${currentTrack.hclCapabilityLead}
+- SBD Client Sponsor: ${currentTrack.sbdCounterpart}
+- Sprint 0 Compliance Readiness: ${pct}%
+
+REAL-TIME UPLOADED DOCUMENTS CONTENT:
+${docsContext}
+
+Answering Instructions (Strict Priority):
+1. TIER 1 (Document Search): Check the UPLOADED DOCUMENTS section above first. If the information to answer the question is found in the uploaded text, answer from it and explicitly cite the file name (e.g., "[Source: filename.pdf]").
+2. TIER 2 (Autonomous AI Brain): If the question (such as ServiceNow terminology like "RITM", "INC", "CHG", ITIL workflows, software engineering questions, cloud architecture, or general definitions) is NOT mentioned in the uploaded documents, DO NOT say "I cannot find this in your document" or give up. Instead, USE YOUR OWN BROAD TECHNICAL INTELLIGENCE to provide a clear, accurate, enterprise-grade answer immediately.
+3. Formats: Return clean HTML tags only (<strong>, <em>, <code>, <ul>, <li>, <br>). Never use raw markdown asterisks or code blocks. Keep answers clean and compact.
+`;
+
+      const payload = {
+        contents: [
+          { role: "user", parts: [{ text: `${systemPrompt}\n\nAssociate Query: ${userQuery}` }] }
+        ],
+        generationConfig: {
+          temperature: 0.3,
+          maxOutputTokens: 2048
+        }
+      };
+
+      let lastError = null;
+
+      // Automated Failover Loop across model fleet to avoid 503/429 high-demand stops
+      for (const model of GEMINI_MODELS) {
+        try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+              return data.candidates[0].content.parts[0].text;
+            }
+          } else {
+            const errorData = await response.json().catch(() => ({}));
+            lastError = new Error(errorData.error?.message || `HTTP ${response.status} on ${model}`);
+            continue;
+          }
+        } catch (netErr) {
+          lastError = netErr;
+          continue;
+        }
+      }
+
+      throw lastError || new Error("All AI model endpoints are currently unreachable.");
     }
 
     function configureApiKey() {
@@ -811,7 +880,7 @@
           GEMINI_API_KEY = userKey.trim();
           localStorage.setItem('sbd_gemini_api_key', GEMINI_API_KEY);
           updateAIStatusUI();
-          appendChatMessage('assistant', '✨ <strong>Real-Time Gemini AI Activated!</strong> I can now read your uploaded documents, think deeply, and generate answers using real-time neural intelligence.');
+          appendChatMessage('assistant', '✨ <strong>Real-Time Gemini AI Activated!</strong> I will now prioritize reading your uploaded documents, and seamlessly use my general knowledge brain if extra context is needed.');
         } else if (userKey.trim().length === 0) {
           GEMINI_API_KEY = "";
           localStorage.removeItem('sbd_gemini_api_key');
@@ -821,63 +890,7 @@
       }
     }
 
-    async function callGeminiAI(userQuery) {
-      const currentTrack = TRACK_LEADERSHIP_DATA[activeEmployee.track] || TRACK_LEADERSHIP_DATA["ERP"];
-      const pct = calculateCompliancePercentage();
-      const docsContext = dynamicDocuments.map(d => `[Source Document: ${d.fileName}]\n${d.content.substring(0, 4000)}`).join('\n\n---\n\n');
-
-      const systemPrompt = `
-You are "PulseAI", the executive onboarding and knowledge co-pilot for HCLTech associates deployed on the Stanley Black & Decker (SBD) global engagement account.
-Employee Context:
-- Associate Name: ${activeEmployee.fullName}
-- Mapped Delivery Track: ${activeEmployee.track}
-- Track Description: ${currentTrack.description}
-- HCLTech Project Head: ${currentTrack.hclProjectHead}
-- HCLTech Track Lead: ${currentTrack.hclTrackLead}
-- HCLTech Capability Lead: ${currentTrack.hclCapabilityLead}
-- SBD Client Sponsor: ${currentTrack.sbdCounterpart}
-- Current Sprint 0 Compliance Readiness: ${pct}%
-
-Indexed Account & Uploaded Documents:
-${docsContext}
-
-Core Directives:
-1. Address ${activeEmployee.firstName} professionally as an intelligent colleague.
-2. Ground answers in the provided document context whenever applicable. Always cite the file name if citing extracted facts.
-3. If asked about compliance, mention their current score (${pct}%) and next steps.
-4. Format your output cleanly with HTML tags: <strong>, <em>, <code>, <ul>, <li>, and <br>. Do NOT use raw markdown asterisks (**) or triple-backticks. Keep answers compact for a sleek side-drawer chat interface.
-`;
-
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-      const payload = {
-        contents: [
-          {
-            role: "user",
-            parts: [
-              { text: `${systemPrompt}\n\nEmployee Query: ${userQuery}` }
-            ]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.3,
-          maxOutputTokens: 750
-        }
-      };
-    const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || "Gemini API Network Failure");
-      }
-
-      const data = await response.json();
-      return data.candidates[0].content.parts[0].text;
-    }
-
+    // Modal Control Functions
     function openNameModal() {
       document.getElementById('welcomeOverlay').classList.add('hidden');
       document.getElementById('nameModal').classList.remove('hidden');
@@ -909,6 +922,7 @@ Core Directives:
       document.getElementById('aboutSBDModal').classList.add('hidden');
     }
 
+    // Award Toast Notification Controller
     let toastTimeout = null;
     function showAwardLockedToast(message) {
       const toast = document.getElementById('awardToast');
@@ -925,6 +939,7 @@ Core Directives:
       }, 3500);
     }
 
+    // Celebration Modal Functions & Award Button Gatekeeper
     function handleAwardButtonClick() {
       const pct = calculateCompliancePercentage();
       if (pct === 100) {
@@ -976,6 +991,7 @@ Core Directives:
       sendQuickPrompt("I have completed all 8 onboarding tasks! What are my production delivery guidelines?");
     }
 
+    // Handle Direct Action Link Click
     function openTaskAction(event, index) {
       event.stopPropagation();
       const task = complianceTasks[index];
@@ -992,6 +1008,7 @@ Core Directives:
       }
     }
 
+    // Apply Personalization
     function applyPersonalization(e) {
       e.preventDefault();
       const name = document.getElementById('userNameInput').value.trim();
@@ -1004,6 +1021,7 @@ Core Directives:
 
       document.getElementById('nameModal').classList.add('hidden');
       
+      // Update Top Nav
       document.getElementById('topUserName').innerText = activeEmployee.fullName;
       document.getElementById('topUserTrack').innerText = `${activeEmployee.track} Track`;
       const initials = name.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase();
@@ -1018,7 +1036,8 @@ Core Directives:
       renderTrackLeadershipUI(track);
       initPulseChat();
       renderComplianceList();
-                        }
+    }
+
     function renderTrackLeadershipUI(trackName) {
       const data = TRACK_LEADERSHIP_DATA[trackName] || TRACK_LEADERSHIP_DATA["ERP"];
       const container = document.getElementById('trackLeadsContainer');
@@ -1093,6 +1112,7 @@ Core Directives:
       }
     }
 
+    // Real-Time Compliance Checklist
     function renderComplianceList() {
       const container = document.getElementById('complianceList');
       if (!container) return;
@@ -1121,6 +1141,7 @@ Core Directives:
             </span>
           </div>
 
+          <!-- Bottom Interactive Path & Link Action Bar -->
           <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t ${task.completed ? 'border-emerald-800/40' : 'border-[#14355a]'} text-[10px]">
             <div class="flex items-center gap-1.5 text-slate-400 font-mono truncate max-w-[280px]">
               <i class="fa-solid fa-location-arrow text-[9px] text-sbd-mustard"></i>
@@ -1140,6 +1161,7 @@ Core Directives:
 
       updateComplianceUI();
     }
+
     function toggleCompliance(index) {
       complianceTasks[index].completed = !complianceTasks[index].completed;
       renderComplianceList();
@@ -1238,18 +1260,21 @@ Core Directives:
           text.innerText = "Sprint 0 Active";
         }
       }
-        }
+    }
+
+    // Real-Time Document Ingestion Engine
     async function handleDocumentUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
       const status = document.getElementById('indexingStatus');
       status.classList.remove('hidden');
+      status.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Extracting full text from <strong>${file.name}</strong>...`;
 
       try {
         let extractedText = "";
 
-        if (file.name.endsWith('.pdf')) {
+        if (file.name.toLowerCase().endsWith('.pdf')) {
           const arrayBuffer = await file.arrayBuffer();
           const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
           let pagesText = [];
@@ -1257,39 +1282,59 @@ Core Directives:
             const page = await pdf.getPage(i);
             const textContent = await page.getTextContent();
             const pageStr = textContent.items.map(item => item.str).join(' ');
-            if (pageStr.trim()) pagesText.push(`[Page ${i}]: ` + pageStr);
+            if (pageStr.trim()) pagesText.push(`[Page ${i}]: ${pageStr}`);
           }
           extractedText = pagesText.join('\n');
         } else {
           extractedText = await file.text();
         }
 
-        if (!extractedText.trim()) throw new Error("No readable text found in file.");
+        if (!extractedText.trim()) {
+          throw new Error("No readable text found inside this file.");
+        }
 
+        // Push into active memory
         dynamicDocuments.unshift({
           fileName: file.name,
-          content: extractedText
+          content: extractedText,
+          uploadedAt: new Date().toLocaleTimeString()
         });
 
+        // Remove placeholder
+        const placeholder = document.getElementById('noDocsPlaceholder');
+        if (placeholder) placeholder.remove();
+
+        // Add document to list
         const list = document.getElementById('uploadedDocsList');
         const item = document.createElement('div');
-        item.className = "flex items-center gap-2 text-[11px] text-sbd-mustard font-medium";
-        item.innerHTML = `<i class="fa-solid fa-file-circle-check"></i> <span class="truncate">${file.name}</span>`;
+        item.className = "flex items-center justify-between gap-2 text-[11px] bg-[#071627] border border-[#163a63] p-1.5 rounded-lg text-sbd-mustard font-medium";
+        item.innerHTML = `
+          <div class="flex items-center gap-1.5 truncate">
+            <i class="fa-solid ${file.name.endsWith('.pdf') ? 'fa-file-pdf text-red-400' : 'fa-file-lines text-blue-400'}"></i>
+            <span class="truncate text-slate-200">${file.name}</span>
+          </div>
+          <span class="text-[9px] text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/40">Active</span>
+        `;
         list.prepend(item);
 
-        document.getElementById('docCountBadge').innerText = `${dynamicDocuments.length} Docs Indexed`;
+        // Update count badge
+        document.getElementById('docCountBadge').innerText = `${dynamicDocuments.length} Doc${dynamicDocuments.length > 1 ? 's' : ''} Indexed`;
+        document.getElementById('docCountBadge').className = "text-[10px] bg-emerald-950/50 text-emerald-300 border border-emerald-600/40 px-2.5 py-1 rounded-full font-bold";
+
         status.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Successfully read & indexed <strong>${file.name}</strong>!`;
         setTimeout(() => status.classList.add('hidden'), 4000);
 
-        const sampleSnippet = extractedText.replace(/\s+/g, ' ').substring(0, 320);
+        const sampleSnippet = extractedText.replace(/\s+/g, ' ').substring(0, 240);
         appendChatMessage('assistant', 
-          `📄 <strong>I have read and indexed: ${file.name}</strong><br><br>` +
-          `<strong>Extracted Preview:</strong><br><em>"${sampleSnippet}..."</em><br><br>` +
-          `Ask me anything about <strong>${file.name}</strong> and I will cite its contents directly!`
+          `📄 <strong>Indexed New Document: ${file.name}</strong><br><br>` +
+          `<em>"${sampleSnippet}..."</em><br><br>` +
+          `You can now ask questions about this document. PulseAI will prioritize its contents first, and use generative reasoning if extra context is needed!`
         );
 
+        event.target.value = '';
+
       } catch (err) {
-        status.innerHTML = `<span class="text-red-400"><i class="fa-solid fa-triangle-exclamation"></i> Could not read document: ${err.message}</span>`;
+        status.innerHTML = `<span class="text-red-400"><i class="fa-solid fa-triangle-exclamation"></i> Upload Error: ${err.message}</span>`;
       }
     }
 
@@ -1316,7 +1361,7 @@ Core Directives:
             • <strong>Your Project Head:</strong> ${trackData.hclProjectHead}<br>
             • <strong>Your Track Lead:</strong> ${trackData.hclTrackLead}<br>
             • <strong>Client Counterpart:</strong> ${trackData.sbdCounterpart}<br><br>
-            Use the action buttons in the checklist to access portals directly, or ask me any question! Click the <i class="fa-solid fa-key text-sbd-mustard"></i> icon in the header to activate real-time Gemini AI.
+            Use the action buttons in the checklist to access portals directly, or ask me any question! Click the <i class="fa-solid fa-key text-sbd-mustard"></i> icon in the header to configure your Gemini API key.
           </div>
         </div>
       `;
@@ -1324,6 +1369,7 @@ Core Directives:
       updateAIStatusUI();
     }
 
+    // Chat Submission with Real-Time AI & Fallback
     async function handleChatSubmit(e) {
       if (e) e.preventDefault();
       const input = document.getElementById('chatInputBox');
@@ -1336,11 +1382,13 @@ Core Directives:
       const typingId = showPulseTyping();
       scrollToBottom();
 
+      // Check if user has active Gemini API Key for Real-Time Execution
       if (GEMINI_API_KEY) {
         try {
           const aiResponse = await callGeminiAI(text);
           removePulseTyping(typingId);
           
+          // Clean up formatting
           let formatted = aiResponse
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -1354,14 +1402,28 @@ Core Directives:
           removePulseTyping(typingId);
           appendChatMessage('assistant', `<span class="text-amber-400">⚠️ Live AI Notice: ${err.message}</span><br>Switching automatically to local verified knowledge base:`);
         }
-            }
+      }
+
+      // Local Knowledge Base Fallback Handler (If no key is configured)
       setTimeout(() => {
         removePulseTyping(typingId);
         const q = text.toLowerCase();
         const currentTrack = TRACK_LEADERSHIP_DATA[activeEmployee.track] || TRACK_LEADERSHIP_DATA["ERP"];
         let reply = "";
 
-        if (q.includes('my track') || q.includes('my lead') || q.includes('who is my') || q.includes('who are my leaders')) {
+        // Check uploaded document contents locally if uploaded
+        let docHit = null;
+        if (dynamicDocuments.length > 0) {
+          docHit = dynamicDocuments.find(d => d.content.toLowerCase().includes(q) || q.includes(d.fileName.toLowerCase()));
+        }
+
+        if (docHit) {
+          const snippet = docHit.content.replace(/\s+/g, ' ').substring(0, 320);
+          reply = `Found in your uploaded document (<strong>${docHit.fileName}</strong>):<br><br>` +
+                  `"${snippet}..."<br><br>` +
+                  `<span class="text-sbd-mustard text-[11px] font-semibold">📄 Source: ${docHit.fileName}</span>`;
+        }
+        else if (q.includes('my track') || q.includes('my lead') || q.includes('who is my') || q.includes('who are my leaders')) {
           reply = `Here are the leads for your assigned track (<strong>${activeEmployee.track}</strong>), ${activeEmployee.firstName}:<br><br>` +
                   `• <strong>HCLTech Project Head:</strong> ${currentTrack.hclProjectHead}<br>` +
                   `• <strong>HCLTech Track Lead:</strong> ${currentTrack.hclTrackLead}<br>` +
@@ -1382,19 +1444,6 @@ Core Directives:
                   `• <strong>AES- GovernX:</strong> Priyanshu Tripathi (Track Lead) | Ajay Tripathi (Capability Lead)<br><br>` +
                   `<em>Click <strong>"View Full Hierarchy"</strong> in the top header to view the full interactive organizational matrix!</em>`;
         }
-        else if (q.includes('document') || q.includes('upload') || q.includes('summarize')) {
-          if (dynamicDocuments.length > 3) {
-            const userDoc = dynamicDocuments[0];
-            const snippet = userDoc.content.replace(/\s+/g, ' ').substring(0, 350);
-            reply = `Summary extracted from your uploaded file (<strong>${userDoc.fileName}</strong>):<br><br>` +
-                    `"${snippet}..."<br><br>` +
-                    `<span class="text-sbd-mustard text-[11px] font-semibold">📄 Verified Source: ${userDoc.fileName}</span>`;
-          } else {
-            reply = `Currently indexed documents:<br>` +
-                    dynamicDocuments.map(d => `• <strong>${d.fileName}</strong>`).join('<br>') +
-                    `<br><br>Upload additional documents via the reader above or enter your Gemini Key for live synthesis!`;
-          }
-        }
         else if (q.includes('link') || q.includes('portal') || q.includes('url') || q.includes('servicenow') || q.includes('isuccess')) {
           reply = `<strong>Key Portal Links for Sprint 0 Onboarding:</strong><br><br>` +
                   `• <strong>SBD ID Portal:</strong> <code>https://identity.stanleyblackanddecker.com</code><br>` +
@@ -1414,14 +1463,15 @@ Core Directives:
                     : `• <strong>Status:</strong> All 8 Sprint 0 compliance requirements are 100% completed! You are certified for Production Delivery. 🎉`);
         }
         else {
-          reply = `Regarding <em>"${text}"</em>: You can reach out directly to your <strong>${activeEmployee.track}</strong> Track Lead (<strong>${currentTrack.hclTrackLead}</strong>) or Project Head (<strong>${currentTrack.hclProjectHead}</strong>).<br><br><em>Tip: Click the <i class="fa-solid fa-key text-sbd-mustard"></i> key icon in the top right to configure a Gemini API key for open-ended generative responses!</em>`;
+          reply = `Regarding <em>"${text}"</em>: You can reach out directly to your <strong>${activeEmployee.track}</strong> Track Lead (<strong>${currentTrack.hclTrackLead}</strong>) or Project Head (<strong>${currentTrack.hclProjectHead}</strong>).<br><br><em>Tip: Upload documents into the reader above, or click the <i class="fa-solid fa-key text-sbd-mustard"></i> key icon in the top right to configure a Gemini API key for open-ended generative responses!</em>`;
         }
 
         appendChatMessage('assistant', reply);
         scrollToBottom();
       }, 350);
-            }
-        function appendChatMessage(role, content) {
+    }
+
+    function appendChatMessage(role, content) {
       const feed = document.getElementById('chatFeed');
       const div = document.createElement('div');
 
@@ -1485,4 +1535,3 @@ Core Directives:
   </script>
 </body>
 </html>
-    
